@@ -174,7 +174,7 @@ namespace ImageProcessingApp
 
         static void GradationTransformations()
         {
-            int histogramheight = 512;
+            int histogramheight = 256;
             Console.WriteLine("Введите полный путь для фото:");
             string imagePath = Console.ReadLine();
             Console.WriteLine("Обработка изображения...");
@@ -310,23 +310,22 @@ namespace ImageProcessingApp
                 }
             }
 
-            Bitmap outputImage = new Bitmap(256, histogramHeight);
+            Bitmap outputImage = new Bitmap(256, histogramHeight + 1); // Изменил здесь
 
             double scaleFactor = (double)histogramHeight / maxHeight;
 
-            for (int i = 0; i < 255; i++)
+            for (int i = 0; i < 256; i++) // Изменил здесь
             {
-                int lineStartY = histogramHeight - 1;
-                int lineEndY = (int)(histogramHeight - 1 - histogram[i] * scaleFactor);
+                int lineStartY = histogramHeight;
+                int lineEndY = (int)(histogramHeight - histogram[i] * scaleFactor);
 
-                for (int y = lineStartY; y >= lineEndY; y--)
+                for (int y = lineStartY; y > lineEndY; y--) // Изменил здесь
                 {
-                    outputImage.SetPixel(i, y, Color.Black);
+                    outputImage.SetPixel(i, y - 1, Color.Black); // Изменил здесь
                 }
             }
 
-            outputImage.Save(outputFilePath); // Сохранение изображения
-
+            outputImage.Save(outputFilePath);
             outputImage.Dispose();
         }
     }
