@@ -310,18 +310,18 @@ namespace ImageProcessingApp
                 }
             }
 
-            Bitmap outputImage = new Bitmap(256, histogramHeight + 1); // Изменил здесь
+            Bitmap outputImage = new Bitmap(256, histogramHeight + 1); 
 
             double scaleFactor = (double)histogramHeight / maxHeight;
 
-            for (int i = 0; i < 256; i++) // Изменил здесь
+            for (int i = 0; i < 256; i++) 
             {
                 int lineStartY = histogramHeight;
                 int lineEndY = (int)(histogramHeight - histogram[i] * scaleFactor);
 
-                for (int y = lineStartY; y > lineEndY; y--) // Изменил здесь
+                for (int y = lineStartY; y > lineEndY; y--)
                 {
-                    outputImage.SetPixel(i, y - 1, Color.Black); // Изменил здесь
+                    outputImage.SetPixel(i, y - 1, Color.Black);
                 }
             }
 
